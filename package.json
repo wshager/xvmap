@@ -1,0 +1,24 @@
+{
+  "name": "xvmap",
+  "version": "0.0.1",
+  "description": "Maps for XV",
+  "main": "./lib/xvmap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wshager/xvmap.git"
+  },
+  "author": "W.S. Hager",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/wshager/xvmap/issues"
+  },
+  "homepage": "https://github.com/wshager/xvmap#readme",
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "xverr": "0.0.2",
+    "xvseq": "^0.1.0"
+  }
+}
