@@ -1,22 +1,39 @@
 import { Map } from "immutable";
 
-import { seqOf, _first, _isSeq, _wrap } from "xvseq";
+import { seq, _first, _isSeq, _wrap } from "xvseq";
 
-export function map(...a) {
+import { error } from "xverr";
+
+export function _isMap($maybe){
+	let maybe = _first($maybe);
+	return !!(maybe && Map.isMap(maybe));
+}
+
+export function _map(a){
 	var l = a.length;
 	var m = Map();
 	if(l===0){
-		return seqOf(m);
+		return m;
 	}
 	if(l==1 && _isSeq(a[0])){
 		a = a[0];
 		// expect a sequence of maps
 		if(!a.isEmpty()) {
-	        return seqOf(a.reduce((pre,cur) => pre.merge(Map(cur)),m));
+			return a.reduce((pre,cur) => {
+				cur = _first(cur);
+				return pre.merge(Map.isMap(cur) ? cur : Map(cur));
+			},m);
 	    }
-	    return seqOf(m);
+	    return m;
 	}
-	return seqOf(a.reduce((pre,cur) => pre.merge(Map(_first(cur))),m));
+	return a.reduce((pre,cur) => {
+		cur = _first(cur);
+		return pre.merge(Map.isMap(cur) ? cur : Map(cur));
+	},m);
+}
+
+export function map(...a) {
+	return seq(_map(a));
 }
 
 export const merge = map;
@@ -24,7 +41,7 @@ export const merge = map;
 export function put($map,$k,$v) {
 	var k = _first($k);
 	var map = _first($map);
-	return seqOf(map.set(k,seqOf($v)));
+	return seq(map.set(k,seq($v)));
 }
 
 export function keys($map) {
@@ -42,11 +59,16 @@ export function forEachEntry($map,$fn){
 	});
 }
 
-export function entry($key,$val){
-	return map($key,$val);
+export function entry(...a){
+	// TODO template errors
+	if(a.length!=2) return error("err:XPST0017","Number of arguments of function map.entry doesn't match function signature (expected 2, got "+a.length+")");
+	var m  = Map();
+	return seq(m.set(_first(a[0]),seq(a[1])));
 }
 
 export function get($map,$key) {
 	var map = _first($map);
-	return seqOf(map.get(_first($key)));
+	return seq(map.get(_first($key)));
 }
+
+export { Map };

@@ -1,6 +1,6 @@
 {
   "name": "xvmap",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Maps for XV",
   "main": "./lib/xvmap.js",
   "scripts": {
@@ -18,7 +18,10 @@
   "homepage": "https://github.com/wshager/xvmap#readme",
   "dependencies": {
     "immutable": "^3.8.1",
-    "xverr": "0.0.2",
-    "xvseq": "^0.1.0"
+    "xverr": "0.0.4",
+    "xvseq": "^0.1.1"
+  },
+  "devDependencies": {
+    "xvarray": "0.0.2"
   }
 }
