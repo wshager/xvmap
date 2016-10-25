@@ -1,6 +1,6 @@
 {
   "name": "xvmap",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Maps for XV",
   "main": "./lib/xvmap.js",
   "scripts": {
@@ -19,9 +19,10 @@
   "dependencies": {
     "immutable": "^3.8.1",
     "xverr": "0.0.4",
-    "xvseq": "^0.1.4"
+    "xvseq": "^0.1.6"
   },
   "devDependencies": {
-    "xvarray": "0.0.2"
+    "babel-cli": "^6.18.0",
+    "xvarray": "0.0.6"
   }
 }
