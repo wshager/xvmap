@@ -53,10 +53,17 @@ export function contains($map,$k){
 }
 
 export function forEachEntry($map,$fn){
+	let map = _first($map);
 	let fn = _first($fn);
-	return $map.map(function(map){
-		return map.entries(_wrap(fn));
+	var ret = seq();
+	map.forEach(function(v,k){
+		var s = seq($fn(seq(k),seq(v)));
+		s.forEach(function(v){
+			ret._array.push(v);
+		});
 	});
+	ret._array.size = ret._array.length;
+	return ret;
 }
 
 export function entry(...a){
