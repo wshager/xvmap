@@ -1,6 +1,6 @@
 {
   "name": "xvmap",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Maps for XV",
   "main": "./lib/xvmap.js",
   "scripts": {
