@@ -1,6 +1,6 @@
 import { Map } from "immutable";
 
-import { seq, _first, _isSeq, _wrap } from "xvseq";
+import { seq, toSeq, _first, _isSeq } from "xvseq";
 
 import { error } from "xverr";
 
@@ -41,11 +41,11 @@ export const merge = map;
 export function put($map,$k,$v) {
 	var k = _first($k);
 	var map = _first($map);
-	return seq(map.set(k,seq($v)));
+	return seq(map.set(k,_isSeq($v) && $v.size>1 ? $v : _first($v)));
 }
 
 export function keys($map) {
-	return $map.first().keySeq();
+	return toSeq($map.first().keySeq().toArray());
 }
 
 export function contains($map,$k){
@@ -69,8 +69,10 @@ export function forEachEntry($map,$fn){
 export function entry(...a){
 	// TODO template errors
 	if(a.length!=2) return error("err:XPST0017","Number of arguments of function map.entry doesn't match function signature (expected 2, got "+a.length+")");
-	var m  = Map();
-	return seq(m.set(_first(a[0]),seq(a[1])));
+	var m  = Map(),
+		k = _first(a[0]),
+		v = a[1];
+	return seq(m.set(_first(a[0]),_isSeq(v) && v.size>1 ? v : _first(v)));
 }
 
 export function get($map,$key) {
