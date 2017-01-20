@@ -3,6 +3,12 @@ var xvarray = require("xvarray");
 
 var seq = require("xvseq").seq;
 
+function assertEq(a,b){
+	var ajs = JSON.stringify(a.toJS ? a.toJS() : a);
+	var bjs = JSON.stringify(b.toJS ? b.toJS() : b);
+	assert.equal(ajs,bjs,`${ajs} not equal to ${bjs}`);
+}
+
 let map = xvmap.map({
 	"a":{"x":1},
 	"b":2

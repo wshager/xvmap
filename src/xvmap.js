@@ -77,7 +77,9 @@ export function entry(...a){
 
 export function get($map,$key) {
 	var map = _first($map);
-	return seq(map.get(_first($key)));
+	var k = _first($key).valueOf();
+	var v = map.get(k);
+	return v !== undefined ? seq(v) : seq();
 }
 
 export { Map, OrderedMap };
