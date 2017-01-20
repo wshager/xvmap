@@ -1,4 +1,4 @@
-import { Map } from "immutable";
+import { OrderedMap as Map } from "immutable";
 
 import { seq, toSeq, _first, _isSeq } from "xvseq";
 
