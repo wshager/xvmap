@@ -1,4 +1,4 @@
-import { OrderedMap as Map } from "immutable";
+import { OrderedMap, Map } from "immutable";
 
 import { seq, toSeq, _first, _isSeq } from "xvseq";
 
@@ -21,14 +21,14 @@ export function _map(a){
 		if(!a.isEmpty()) {
 			return a.reduce((pre,cur) => {
 				cur = _first(cur);
-				return pre.merge(Map.isMap(cur) ? cur : Map(cur));
+				return pre.merge(Map.isMap(cur) ? cur : OrderedMap(cur));
 			},m);
 	    }
 	    return m;
 	}
 	return a.reduce((pre,cur) => {
 		cur = _first(cur);
-		return pre.merge(Map.isMap(cur) ? cur : Map(cur));
+		return pre.merge(Map.isMap(cur) ? cur : OrderedMap(cur));
 	},m);
 }
 
@@ -69,7 +69,7 @@ export function forEachEntry($map,$fn){
 export function entry(...a){
 	// TODO template errors
 	if(a.length!=2) return error("err:XPST0017","Number of arguments of function map.entry doesn't match function signature (expected 2, got "+a.length+")");
-	var m  = Map(),
+	var m  = OrderedMap(),
 		k = _first(a[0]),
 		v = a[1];
 	return seq(m.set(_first(a[0]),_isSeq(v) && v.size>1 ? v : _first(v)));
@@ -80,4 +80,4 @@ export function get($map,$key) {
 	return seq(map.get(_first($key)));
 }
 
-export { Map };
+export { Map, OrderedMap };
